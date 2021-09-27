@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+<body>
+    <section>
+    <h1>
+        <p><span id="cn"></span></p>
+    </h1>
+    <p>info : <span id="c"></span><br />
+        <span id=ca></span><br />
+        <span id=d></span><br />
+        <span id=ry></span><br />
+        score a: <span id=sa></span><br />
+        score b: <span id=sb></span><br />
+        score c: <span id=sc></span><br />
+        </p>
+    <table>
+        <caption> SomeData</caption>
+        <thead>
+            <th>X</th>
+            <th>Y</th>
+        </thead>
+        
+        <tbody>
+            <tr>
+
+                <td><span id="sd00"></span></td>
+                <td><span id="sd01"></span></td>
+            </tr>
+            <tr>
+
+                <td><span id="sd10"></span></td>
+                <td><span id="sd11"></span></td>
+            </tr><tr>
+
+                <td><span id="sd20"></span></td>
+                <td><span id="sd21"></span></td>
+            </tr><tr>
+
+                <td><span id="sd30"></span></td>
+                <td><span id="sd31"></span></td>
+            </tr>
+        </tbody>
+
+    </table>
+</section>
+</section>
+    <script>
+        const api_url = 'https://4v9r83qfo4.execute-api.eu-central-1.amazonaws.com/dev';
+       
+  
+        async function APIData() {
+            const response = await fetch(api_url);
+            const data = await response.json();
+            const { course, courseActive, courseName, date, releaseYear,scores,someData} = data
+            console.log(data)
+
+            document.getElementById('cn').textContent= courseName;
+            document.getElementById('c').textContent= course;
+            document.getElementById('ca').textContent= courseActive;
+            document.getElementById('d').textContent= date;
+            document.getElementById('ry').textContent= releaseYear;
+            document.getElementById('sa').textContent= scores["a"];
+            document.getElementById('sb').textContent= scores["b"];
+            document.getElementById('sc').textContent= scores["c"];
+            document.getElementById('sd00').textContent= someData[0][0];
+            document.getElementById('sd01').textContent= someData[0][1];
+            document.getElementById('sd10').textContent= someData[1][0];
+            document.getElementById('sd11').textContent= someData[1][1];
+            document.getElementById('sd20').textContent= someData[2][0];
+            document.getElementById('sd21').textContent= someData[2][1];
+            document.getElementById('sd30').textContent= someData[3][0];
+            document.getElementById('sd31').textContent= someData[3][1];
+        }
+        APIData();
+
+    </script>
+
+
+
+</body>
+</html>
+  
