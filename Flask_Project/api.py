@@ -35,13 +35,27 @@ def get_scores():
     print(sc)
     return jsonify(data['scores'][str(sc)])
 
-
-@app.route('/api/resources/data/scores/add/a', methods=['PUT'])
-def upt_scores():
-    sc=request.args.get('sc')
-    val=request.args.get('val')
-    print(sc,val)
+@app.route('/api/resources/data/scores', methods=['POST'])
+def post_scores():
+    sc=request.json['sc']
+    val=request.json['value']
     data['scores'][str(sc)]=val
-    res = make_response(jsonify({"message": "Collection replaced"}), 200)
+    res = make_response(jsonify({"message": "data replaced"}), 200)
     return res
+
+
+@app.route('/api/resources/data/scores/<int>', methods=['PUT'])
+def put_scores():
+    sc=request.json['sc']
+    val=request.json['value']
+    data['scores'][str(sc)]=val
+    res = make_response(jsonify({"message": "data updated"}), 200)
+    return res
+
+
+
+
 app.run()
+
+
+
